@@ -1,0 +1,24 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+Standard: Latest
+ColumnLimit: 120
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+PointerAlignment: Left
+AllowShortFunctionsOnASingleLine: Empty
+BreakConstructorInitializers: BeforeColon
+PackConstructorInitializers: CurrentLine
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: "^<[^/]+>$"
+    Priority: 1
+  - Regex: "^<(SDL3/|libav|libsw)"
+    Priority: 2
+  - Regex: '^".*"'
+    Priority: 3
+  - Regex: ".*"
+    Priority: 4
+...
