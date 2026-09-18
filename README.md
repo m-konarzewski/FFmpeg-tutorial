@@ -18,10 +18,25 @@ Linux is currently the only supported and tested platform. The build uses
 FFmpeg is discovered through `pkg-config`. SDL3 is added to the build from the
 submodule source tree with `add_subdirectory`.
 
-When cloning the repository, initialize the SDL3 submodule with:
+## Get the Source
+
+Because of SDL existing as a submodule, you can use:
 
 ```sh
 git clone --recurse-submodules https://github.com/m-konarzewski/FFmpeg-tutorial.git
+```
+
+Otherwise, first clone the tutorial repository itself:
+
+```sh
+git clone https://github.com/m-konarzewski/FFmpeg-tutorial.git
+cd FFmpeg-tutorial
+```
+
+Then fetch and initialize the SDL3 submodule:
+
+```sh
+git submodule update --init --recursive
 ```
 
 ## Build All Lessons
