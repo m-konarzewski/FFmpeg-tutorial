@@ -17,3 +17,4 @@ add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 include(cmake/Dependencies.cmake)
 
 add_subdirectory(src/Lesson-1)
+add_subdirectory(src/Lesson-2)
