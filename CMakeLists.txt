@@ -18,3 +18,4 @@ include(cmake/Dependencies.cmake)
 
 add_subdirectory(src/Lesson-1)
 add_subdirectory(src/Lesson-2)
+add_subdirectory(src/Lesson-3)
