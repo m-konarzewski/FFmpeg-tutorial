@@ -1,24 +1,42 @@
----
-Language: Cpp
 BasedOnStyle: Google
+Language: Cpp
 Standard: Latest
-ColumnLimit: 120
 IndentWidth: 4
-TabWidth: 4
+ContinuationIndentWidth: 4
+AccessModifierOffset: -4
+ColumnLimit: 120
 UseTab: Never
+DerivePointerAlignment: false
 PointerAlignment: Left
-AllowShortFunctionsOnASingleLine: Empty
-BreakConstructorInitializers: BeforeColon
-PackConstructorInitializers: CurrentLine
-SortIncludes: CaseSensitive
+NamespaceIndentation: None
 IncludeBlocks: Regroup
+SortIncludes: true
+IncludeIsMainRegex: "$"
+IncludeIsMainSourceRegex: ""
 IncludeCategories:
-  - Regex: "^<[^/]+>$"
+  - Regex: "^<(algorithm|array|atomic|bit|cassert|cctype|cerrno|cfenv|cfloat|charconv|chrono|cinttypes|climits|clocale|cmath|compare|complex|concepts|condition_variable|coroutine|cstddef|cstdint|cstdio|cstdlib|cstring|ctime|cwchar|cwctype|deque|exception|expected|filesystem|format|forward_list|fstream|functional|future|initializer_list|iomanip|ios|iosfwd|iostream|istream|iterator|latch|limits|list|locale|map|memory|memory_resource|mutex|new|numbers|numeric|optional|ostream|queue|random|ranges|ratio|regex|scoped_allocator|semaphore|set|shared_mutex|span|sstream|stack|stdexcept|stop_token|streambuf|string|string_view|system_error|thread|tuple|type_traits|typeindex|typeinfo|unordered_map|unordered_set|utility|valarray|variant|vector|version)>$"
     Priority: 1
-  - Regex: "^<(SDL3/|libav|libsw)"
+  - Regex: "^<.*>$"
     Priority: 2
-  - Regex: '^".*"'
+  - Regex: '^".*"$'
     Priority: 3
-  - Regex: ".*"
-    Priority: 4
-...
+BreakBeforeBraces: Custom
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+BreakConstructorInitializers: BeforeColon
+AllowShortLambdasOnASingleLine: false
+PackConstructorInitializers: CurrentLine
+BraceWrapping:
+  AfterClass: true
+  AfterControlStatement: Never
+  AfterEnum: true
+  AfterExternBlock: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: true
+FixNamespaceComments: true

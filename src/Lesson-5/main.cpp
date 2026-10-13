@@ -4,7 +4,8 @@
 #include <memory>
 #include <string>
 
-extern "C" {
+extern "C"
+{
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavutil/avutil.h>
@@ -16,9 +17,11 @@ extern "C" {
 // The function itself is a non-type template parameter, so the deleter is
 // stateless and unique_ptr stays the size of a raw pointer.
 template <auto Free>
-struct Deleter {
+struct Deleter
+{
     template <typename T>
-    void operator()(T* ptr) const noexcept {
+    void operator()(T* ptr) const noexcept
+    {
         Free(&ptr);
     }
 };
@@ -31,22 +34,26 @@ using CodecContext = Handle<AVCodecContext, avcodec_free_context>;
 using Packet = Handle<AVPacket, av_packet_free>;
 using Frame = Handle<AVFrame, av_frame_free>;
 
-struct Counters {
+struct Counters
+{
     std::int64_t packets_sent = 0;
     std::int64_t frames_received = 0;
 };
 
-std::string error_string(int error) {
+std::string error_string(int error)
+{
     char buffer[AV_ERROR_MAX_STRING_SIZE] = {};
     av_strerror(error, buffer, sizeof(buffer));
     return buffer;
 }
 
-std::string timestamp_string(std::int64_t timestamp) {
+std::string timestamp_string(std::int64_t timestamp)
+{
     return timestamp != AV_NOPTS_VALUE ? std::format("{}", timestamp) : std::string{"N/A"};
 }
 
-void print_frame(const AVFrame* frame, const AVStream* stream, std::int64_t index) {
+void print_frame(const AVFrame* frame, const AVStream* stream, std::int64_t index)
+{
     // Not every demuxer/decoder combination fills frame->pts, so fall back
     // to the timestamp FFmpeg guessed for the frame.
     const std::int64_t pts = frame->pts != AV_NOPTS_VALUE ? frame->pts : frame->best_effort_timestamp;
@@ -65,7 +72,8 @@ void print_frame(const AVFrame* frame, const AVStream* stream, std::int64_t inde
 // Pulls every frame the decoder can currently give us.
 // Returns 0 when the decoder needs more input (EAGAIN) or is fully drained (EOF),
 // a negative AVERROR code on a real decoding error.
-int receive_frames(AVCodecContext* codec, AVFrame* frame, const AVStream* stream, Counters& counters) {
+int receive_frames(AVCodecContext* codec, AVFrame* frame, const AVStream* stream, Counters& counters)
+{
     while (true) {
         const int ret = avcodec_receive_frame(codec, frame);
         if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
@@ -82,7 +90,8 @@ int receive_frames(AVCodecContext* codec, AVFrame* frame, const AVStream* stream
     }
 }
 
-int run(const char* path) {
+int run(const char* path)
+{
     // 1. Open the container. avformat_open_input takes an AVFormatContext**
     //    and allocates the context itself, which is exactly the shape
     //    std::out_ptr adapts: the unique_ptr is reset with the new pointer
@@ -211,7 +220,8 @@ int run(const char* path) {
     return 0;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     if (argc != 2) {
         std::cerr << std::format("Usage: {} <input file>\n", argv[0]);
         return 1;

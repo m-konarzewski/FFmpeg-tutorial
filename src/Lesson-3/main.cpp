@@ -1,11 +1,13 @@
-extern "C" {
+extern "C"
+{
 #include <libavformat/avformat.h>
 }
 
 #include <format>
 #include <iostream>
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     if (argc < 2) {
         std::cerr << std::format("usage: {} <input file>\n", argv[0]);
         return 1;
